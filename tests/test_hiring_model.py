@@ -18,8 +18,8 @@ def test_model_accuracy_above_threshold(trained_hiring_model, hiring_data):
 
 
 def test_gender_bias_present():
-    X, _ = generate_hiring_dataset(n=5000, seed=42, bias_strength=0.15)
-    _, y = generate_hiring_dataset(n=5000, seed=42, bias_strength=0.15)
+    X, _ = generate_hiring_dataset(n=5000, seed=42, bias_strength=0.25)
+    _, y = generate_hiring_dataset(n=5000, seed=42, bias_strength=0.25)
     model = train_hiring_model(X, y)
 
     preds = model.predict(X)
@@ -29,14 +29,14 @@ def test_gender_bias_present():
     assert rate_gender0 > rate_gender1, (
         f"Expected gender=0 hire rate ({rate_gender0:.3f}) > gender=1 ({rate_gender1:.3f})"
     )
-    assert (rate_gender0 - rate_gender1) > 0.03, (
+    assert (rate_gender0 - rate_gender1) > 0.08, (
         f"Bias margin too small: {rate_gender0 - rate_gender1:.3f}"
     )
 
 
 def test_age_bias_present():
-    X, _ = generate_hiring_dataset(n=5000, seed=42, bias_strength=0.15)
-    _, y = generate_hiring_dataset(n=5000, seed=42, bias_strength=0.15)
+    X, _ = generate_hiring_dataset(n=5000, seed=42, bias_strength=0.25)
+    _, y = generate_hiring_dataset(n=5000, seed=42, bias_strength=0.25)
     model = train_hiring_model(X, y)
 
     preds = model.predict(X)

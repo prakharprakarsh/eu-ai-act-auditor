@@ -7,7 +7,7 @@ import pandas as pd
 def generate_hiring_dataset(
     n: int = 5000,
     seed: int = 42,
-    bias_strength: float = 0.15,
+    bias_strength: float = 0.25,
 ) -> tuple[pd.DataFrame, pd.Series]:
     rng = np.random.default_rng(seed)
 

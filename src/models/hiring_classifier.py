@@ -25,7 +25,7 @@ def train_hiring_model(X: pd.DataFrame, y: pd.Series) -> XGBClassifier:
 if __name__ == "__main__":
     from models.synthetic_data import generate_hiring_dataset
 
-    X, y = generate_hiring_dataset(n=5000, seed=42, bias_strength=0.15)
+    X, y = generate_hiring_dataset(n=5000, seed=42, bias_strength=0.25)
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42, stratify=y
     )
