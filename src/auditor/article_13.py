@@ -83,7 +83,7 @@ def audit(
         checks.append(Check(
             name="shap_global_importance",
             status=AuditStatus.PASS,
-            value=f"top: {next(iter(top5))}",
+            value=next(iter(top5)),
             threshold=None,
             message=f"SHAP computed. Top 5 features: {list(top5)}",
         ))

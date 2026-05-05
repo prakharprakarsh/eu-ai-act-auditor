@@ -29,6 +29,9 @@ def audit(
     pos_prob = proba[:, 1]
     max_prob = proba.max(axis=1)
 
+    evidence["y_true"] = y_arr.tolist()
+    evidence["y_prob"] = pos_prob.tolist()
+
     # --- Brier score ---
     brier = float(np.mean((pos_prob - y_arr) ** 2))
     evidence["brier_score"] = round(brier, 6)
