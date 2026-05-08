@@ -1,6 +1,6 @@
 ---
 title: EU AI Act Auditor
-emoji: ⚖️
+emoji: 📋
 colorFrom: blue
 colorTo: indigo
 sdk: gradio
