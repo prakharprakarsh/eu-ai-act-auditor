@@ -7,3 +7,4 @@ scipy==1.15.3
 shap==0.51.0
 fairlearn==0.13.0
 pytest==9.0.3
+gradio==5.50.0
