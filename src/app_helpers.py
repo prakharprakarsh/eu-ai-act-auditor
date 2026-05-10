@@ -27,6 +27,28 @@ _BADGE_COLOR = {
 }
 
 
+def ensure_bundled_artifacts() -> None:
+    if (_DATA / "model.pkl").exists():
+        return
+    print("[startup] Bundled hiring model not found, generating now...")
+    from sklearn.model_selection import train_test_split
+    from models.hiring_classifier import train_hiring_model
+    from models.synthetic_data import generate_hiring_dataset
+
+    _DATA.mkdir(parents=True, exist_ok=True)
+    X, y = generate_hiring_dataset(n=5000, seed=42, bias_strength=0.25)
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.2, random_state=42, stratify=y
+    )
+    model = train_hiring_model(X_train, y_train)
+    with open(_DATA / "model.pkl", "wb") as fh:
+        pickle.dump(model, fh)
+    X_train.to_parquet(_DATA / "X_train.parquet", index=False)
+    X_test.to_parquet(_DATA / "X_test.parquet", index=False)
+    y_train.to_frame().to_parquet(_DATA / "y_train.parquet", index=False)
+    y_test.to_frame().to_parquet(_DATA / "y_test.parquet", index=False)
+
+
 def _overall(findings: list[AuditFinding]) -> AuditStatus:
     return max(findings, key=lambda f: _SEVERITY[f.status.value]).status
 

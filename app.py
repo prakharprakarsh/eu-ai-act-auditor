@@ -7,7 +7,14 @@ import gradio as gr
 
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 
-from app_helpers import run_bundled, run_custom, update_protected_choices  # noqa: E402
+from app_helpers import (  # noqa: E402
+    ensure_bundled_artifacts,
+    run_bundled,
+    run_custom,
+    update_protected_choices,
+)
+
+ensure_bundled_artifacts()
 
 # ── Tab content ───────────────────────────────────────────────────────────────
 
