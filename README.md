@@ -20,7 +20,7 @@ model and a labelled test dataset, the auditor runs Article-by-Article checks ac
 governance, transparency, human oversight, and accuracy and robustness, then produces a structured
 PDF report with embedded charts and a model card. It is a developer tool, not a legal instrument.
 
-🔗 **Live demo:** [HF Spaces link — added after deploy]
+🔗 **Live demo:** https://huggingface.co/spaces/prakharprakarsh/eu-ai-act-auditor
 
 ---
 
@@ -93,7 +93,7 @@ python app.py
 The app starts at `http://localhost:7860`. Tab 1 runs an audit on the bundled synthetic hiring
 model immediately. No configuration required.
 
-Or try the live demo: [HF Spaces link — added after deploy]
+Or try the live demo: https://huggingface.co/spaces/prakharprakarsh/eu-ai-act-auditor
 
 ---
 
