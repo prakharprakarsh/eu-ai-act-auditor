@@ -12,7 +12,9 @@ license: mit
 
 # EU AI Act Compliance Auditor
 
-An open-source compliance auditing tool for ML systems classified as high-risk under Annex III of
+[![CI](https://github.com/prakharprakarsh/eu-ai-act-auditor/actions/workflows/ci.yml/badge.svg)](https://github.com/prakharprakarsh/eu-ai-act-auditor/actions/workflows/ci.yml)
+
+An auditing tool for ML systems classified as high-risk under Annex III of
 Regulation (EU) 2024/1689 (the EU AI Act). The reference implementation targets **Annex III §4**:
 employment, workers management, and access to self-employment — the category that covers CV
 screening, candidate ranking, and automated shortlisting tools. Given a trained sklearn-compatible
@@ -20,24 +22,23 @@ model and a labelled test dataset, the auditor runs Article-by-Article checks ac
 governance, transparency, human oversight, and accuracy and robustness, then produces a structured
 PDF report with embedded charts and a model card. It is a developer tool, not a legal instrument.
 
-🔗 **Live demo:** https://huggingface.co/spaces/prakharprakarsh/eu-ai-act-auditor
+**Live demo:** https://huggingface.co/spaces/prakharprakarsh/eu-ai-act-auditor
 
 ---
 
 ## Why This Matters
 
-Regulation (EU) 2024/1689 is now in force. Prohibitions on unacceptable-risk AI applied from
-6 February 2025. Rules for General-Purpose AI models apply from 2 August 2026. The full high-risk
-system requirements under Annex III — including conformity assessments, technical documentation,
-human oversight provisions, and post-market monitoring — apply from 2 August 2027. Companies
-deploying CV screening, credit scoring, or other Annex III systems in the EU face binding
-obligations under this timeline, not a future one.
+Regulation (EU) 2024/1689 is in force. Prohibitions on unacceptable-risk AI applied from
+2 February 2025 and the General-Purpose AI rules from 2 August 2025. The Digital Omnibus on AI
+(published July 2026) moved the high-risk requirements for stand-alone Annex III systems — CV
+screening, credit scoring and the rest — to **2 December 2027**, and for AI embedded in regulated
+products (Annex I) to 2 August 2028. That's the window teams have to get conformity assessments,
+documentation and human-oversight measures in place.
 
-There is a gap in the tooling landscape. Most ML teams are familiar with Fairlearn or AIF360 for
-demographic parity checks, and with SHAP for feature importance. Few have wired these into a
-structured Article-by-Article compliance pipeline that maps each metric to a specific legal
-obligation, flags violations against defensible thresholds, and produces audit-ready output. This
-project demonstrates one way to do that for the employment domain.
+Most ML teams already know Fairlearn or AIF360 for parity checks and SHAP for feature
+importance. What I wanted to build was the glue: each metric tied to a specific article, a
+threshold, a PASS/WARN/FAIL status, and a report someone outside the ML team can read. This repo
+does that for the employment domain.
 
 ---
 
@@ -115,7 +116,7 @@ eu-ai-act-auditor/
 │       ├── charts.py         # matplotlib chart generators (PNG, no display)
 │       └── pdf_generator.py  # ReportLab PDF: cover, TOC, per-article sections
 ├── data/processed/           # Synthetic hiring dataset (model.pkl + parquet files)
-├── tests/                    # pytest suite — 77 tests across all four auditor modules
+├── tests/                    # pytest suite, 77 tests
 └── requirements.txt
 ```
 
@@ -128,9 +129,8 @@ recidivism scoring — requires only two things: a trained sklearn-compatible mo
 with documented protected attributes. The four auditor modules in `src/auditor/` take any model
 that exposes `predict()` and `predict_proba()`, so they work unchanged. Add the new model under
 `src/models/`, provide synthetic or open data under `data/`, and wire a new Gradio tab in `app.py`
-following the Tab 1 pattern. The `AuditFinding` contract and the PDF generator require no changes.
-This separation — auditors know nothing about the domain, the domain knows nothing about the report
-format — is the key architectural decision that makes the tool reusable across Annex III categories.
+following the Tab 1 pattern. The `AuditFinding` contract and the PDF generator don't change:
+auditors know nothing about the domain, and the domain knows nothing about the report format.
 
 ---
 

@@ -27,13 +27,13 @@ The dataset and model are purely synthetic — no real personal data is involved
 _ABOUT = """
 ## What is the EU AI Act?
 
-Regulation (EU) 2024/1689 (the EU AI Act) is the world's first comprehensive legal framework for
+Regulation (EU) 2024/1689 (the EU AI Act) is the first broad legal framework for
 artificial intelligence, adopted on 13 June 2024 and published in the Official Journal on 12 July
 2024. It establishes a risk-based classification system and imposes binding obligations on providers
 and deployers of AI systems placed on the EU market or affecting persons in the EU. Key enforcement
-milestones: prohibitions on unacceptable-risk AI applied from **6 February 2025**; General-Purpose
-AI (GPAI) model rules apply from **2 August 2026**; high-risk system requirements under Annex III
-apply from **2 August 2027**.
+milestones: prohibitions on unacceptable-risk AI applied from **2 February 2025**; General-Purpose
+AI (GPAI) model rules from **2 August 2025**; after the 2026 Digital Omnibus, high-risk requirements
+for Annex III systems apply from **2 December 2027** (Annex I products: 2 August 2028).
 
 ## What Does "High-Risk" Mean?
 

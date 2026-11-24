@@ -5,11 +5,11 @@
 ```mermaid
 flowchart TD
     U([User]) -->|uploads model + dataset| APP[app.py\nGradio UI]
-    APP --> |model, X_test, y_test, protected_attrs| A10[art10_data.audit]
-    APP --> |model, X_test, y_test, protected_attrs| A13[art13_transparency.audit]
-    APP --> |model, X_test, y_test, protected_attrs| A14[art14_oversight.audit]
-    APP --> |model, X_test, y_test, protected_attrs| A15[art15_robustness.audit]
-    A10 --> |AuditFinding| PDF[pdf_report.build]
+    APP --> |model, X_test, y_test, protected_attrs| A10[article_10.audit]
+    APP --> |model, X_test, y_test, protected_attrs| A13[article_13.audit]
+    APP --> |model, X_test, y_test, protected_attrs| A14[article_14.audit]
+    APP --> |model, X_test, y_test, protected_attrs| A15[article_15.audit]
+    A10 --> |AuditFinding| PDF[pdf_generator.generate_report]
     A13 --> |AuditFinding| PDF
     A14 --> |AuditFinding| PDF
     A15 --> |AuditFinding| PDF
@@ -17,7 +17,7 @@ flowchart TD
 ```
 
 The four auditors are independent and can run in any order. `app.py` collects all four
-`AuditFinding` objects and passes them to `pdf_report.build()`.
+`AuditFinding` objects and passes them to `pdf_generator.generate_report()`.
 
 ## AuditFinding Dataclass (`src/auditor/base.py`)
 
@@ -70,9 +70,9 @@ Rules:
   caller-supplied or temp directory (never a hardcoded path).
 - Thresholds come from `src/auditor/constants.py`, not inline literals.
 
-## PDF Report Structure (`src/reports/pdf_report.py`)
+## PDF Report Structure (`src/reports/pdf_generator.py`)
 
-`build(findings: list[AuditFinding], output_path: Path) -> Path`
+`generate_report(findings, model_name, dataset_name, output_path) -> Path`
 
 Sections in order:
 
@@ -101,7 +101,7 @@ upload panel
   ├─ deserialise model
   ├─ split X_test / y_test / protected_attrs
   ├─ call audit() on all four modules
-  ├─ call pdf_report.build()
+  ├─ call pdf_generator.generate_report()
   └─ return PDF download link + per-article status badges
 ```
 
